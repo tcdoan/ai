@@ -1,7 +1,11 @@
 # Teaching Pac-Man to Search for food
 
-Teach Pac-Man to search his world to complete the following tasks:
+```
+This lab is possible thanks to the generous contributions of the UC Berkeley AI division and their work on the Pac-Man Project.
+http://ai.berkeley.edu/search.html
+```
 
+Teach Pac-Man to search his world to complete the following tasks:
 - find a single obstacle.
 - find multiple obstacles.
 - find the fastest way to eat all the food in the map.
@@ -146,3 +150,25 @@ Note: If you've written your search code generically, your code should work equa
 python eightpuzzle.py
 
 
+# Program 3: Varying the Cost Function
+
+- BFS finds a fewest-actions path to the goal
+- Here we might want to find paths that are "best" in other senses. 
+
+Consider mediumDottedMaze and mediumScaryMaze.
+- By changing cost function, we can encourage Pacman to find different paths. 
+- For example, we can charge more for dangerous steps in ghost-ridden areas or less for steps in food-rich areas, and a rational Pacman agent should adjust its behavior in response.
+
+Implement uniform-cost graph search algorithm in the uniformCostSearch function in search.py. 
+- We encourage you to look through util.py for some data structures that may be useful in your implementation. 
+- You should now observe successful behavior in all three of the following layouts, where the agents below are all UCS agents that differ only in the cost function they use
+
+```
+python pacman.py -l mediumMaze -p SearchAgent -a fn=ucs
+python pacman.py -l mediumDottedMaze -p StayEastSearchAgent
+python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
+```
+
+## Note: 
+- You should get very low and very high path costs for the StayEastSearchAgent and StayWestSearchAgent respectively, 
+- -  due to their exponential cost functions (see searchAgents.py for details).
