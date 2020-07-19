@@ -91,7 +91,7 @@ python pacman.py -l tinyMaze -p SearchAgent -a fn=tinyMazeSearch
 - Pacman should navigate the maze successfully.
 
 ## Write full-fledged generic search functions to help Pacman plan routes.
-- Remember that a search node must contain not only a state but also the information necessary to reconstruct the path (plan) which gets to that state.
+- Remember that a search node must contain not only a state but also the information necessary to reconstruct the plan which gets to that state.
 - Important note: All of your search functions need to return a list of actions that will lead the agent from the start to the goal.
 - These actions all have to be legal moves (valid directions, no moving through walls).
 
@@ -125,3 +125,24 @@ python pacman.py -l bigMaze -z .5 -p SearchAgent
     - (provided you push successors onto the fringe in the order provided by getSuccessors; you might get 246 if you push them in the reverse order). 
 - Is this a least cost solution? 
     - If not, think about what depth-first search is doing wrong.
+
+# Program 2: Breadth First Search
+
+Implement the breadth-first search (BFS) algorithm in the breadthFirstSearch function in search.py. 
+Write a graph search algorithm that avoids expanding any already visited states.
+Test your code the same way you did for depth-first search.
+
+```
+python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+python pacman.py -l bigMaze -p SearchAgent -a fn=bfs -z .5
+```
+
+Does BFS find a least cost solution? If not, check your implementation.
+
+Hint: If Pacman moves too slowly for you, try the option --frameTime 0.
+
+Note: If you've written your search code generically, your code should work equally well for the eight-puzzle search problem without any changes.
+
+python eightpuzzle.py
+
+
