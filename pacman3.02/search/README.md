@@ -164,11 +164,12 @@ Implement uniform-cost graph search algorithm in the uniformCostSearch function 
 - You should now observe successful behavior in all three of the following layouts, where the agents below are all UCS agents that differ only in the cost function they use
 
 ```
-python pacman.py -l mediumMaze -p SearchAgent -a fn=ucs
+python pacman.py -l mediumMaze       -p SearchAgent -a fn=ucs
 python pacman.py -l mediumDottedMaze -p StayEastSearchAgent
-python pacman.py -l mediumScaryMaze -p StayWestSearchAgent
+python pacman.py -l mediumScaryMaze  -p StayWestSearchAgent
 ```
 
 ## Note: 
 - You should get very low and very high path costs for the StayEastSearchAgent and StayWestSearchAgent respectively, 
 - -  due to their exponential cost functions (see searchAgents.py for details).
+
