@@ -75,7 +75,7 @@ Soon, agent will solve not only tinyMaze, but any maze we want :)
     - Also, all of the commands that appear in this project also appear in commands.txt, for easy copying and pasting. 
     - In UNIX/Mac OS X, you can even run all these commands in order with bash commands.txt.
 
-# Program 1: Finding a Fixed Food Dot using Depth First Search
+# Algorithm 1: Finding a Fixed Food Dot using Depth First Search
 
 ## In searchAgents.py, you'll find a fully implemented SearchAgent, 
 - which plans out a path through Pacman's world and then 
@@ -130,7 +130,7 @@ python pacman.py -l bigMaze -z .5 -p SearchAgent
 - Is this a least cost solution? 
     - If not, think about what depth-first search is doing wrong.
 
-# Program 2: Breadth First Search
+# Algorithm 2: Breadth First Search
 
 Implement the breadth-first search (BFS) algorithm in the breadthFirstSearch function in search.py. 
 Write a graph search algorithm that avoids expanding any already visited states.
@@ -149,8 +149,7 @@ Note: If you've written your search code generically, your code should work equa
 
 python eightpuzzle.py
 
-
-# Program 3: Varying the Cost Function
+# Algorithm 3: Varying the Cost Function
 
 - BFS finds a fewest-actions path to the goal
 - Here we might want to find paths that are "best" in other senses. 
@@ -172,4 +171,21 @@ python pacman.py -l mediumScaryMaze  -p StayWestSearchAgent
 ## Note: 
 - You should get very low and very high path costs for the StayEastSearchAgent and StayWestSearchAgent respectively, 
 - -  due to their exponential cost functions (see searchAgents.py for details).
+
+
+# Algorithm 4: A* search
+
+Implement A* graph search, aStarSearch function in search.py. 
+A* takes a heuristic function as an argument. Heuristics take two arguments: 
+- A state in the search problem (the main argument)
+- And the problem itself (for reference information).
+- The nullHeuristic heuristic function in search.py is a trivial example.
+
+Test A* implementation on the original problem of finding a path through a maze to a fixed position using the Manhattan distance heuristic (implemented as manhattanHeuristic in searchAgents.py).
+
+```
+python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+```
+
+Should see that A* finds the optimal solution slightly faster than uniform cost search (about 549 vs. 620 search nodes expanded in our implementation, but ties in priority may make your numbers differ slightly). What happens on openMaze for the various search strategies?
 
