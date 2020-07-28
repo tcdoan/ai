@@ -189,3 +189,29 @@ python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan
 
 Should see that A* finds the optimal solution slightly faster than uniform cost search (about 549 vs. 620 search nodes expanded in our implementation, but ties in priority may make your numbers differ slightly). What happens on openMaze for the various search strategies?
 
+# Problem 5: Finding All the Corners
+
+The real power of A* will only be apparent with a more challenging search problem. 
+Now, it's time to formulate a new problem and design a heuristic for it.
+
+In corner mazes, there are four dots, one in each corner. Our new search problem is to find the shortest path through the maze that touches all four corners (whether the maze actually has food there or not). Note that for some mazes like tinyCorners, the shortest path does not always go to the closest food first! 
+
+*Hint: the shortest path through tinyCorners takes 28 steps.*
+
+**Implement the CornersProblem in searchAgents.py.**
+- Choose a state representation that encodes all the information necessary to detect whether all four corners have been reached. 
+
+**Now, the search agent should solve:**
+
+```
+python pacman.py -l tinyCorners   -p SearchAgent -a fn=bfs,prob=CornersProblem
+python pacman.py -l mediumCorners -p SearchAgent -a fn=bfs,prob=CornersProblem
+```
+
+- To receive full credit, you need to define an abstract state representation that does not encode irrelevant information (like the position of ghosts, where extra food is, etc.). 
+- In particular, do not use a Pacman GameState as a search state. Your code will be very, very slow if you do (and also wrong).
+
+*Hint: The only parts of the game state you need to reference in your implementation are the starting Pacman position and the location of the four corners.*
+
+Our implementation of breadthFirstSearch expands just under 2000 search nodes on mediumCorners. However, heuristics (used with A* search) can reduce the amount of searching required.
+
