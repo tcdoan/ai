@@ -174,7 +174,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             elif fcost < fringe[nextState][0] + fringe[nextState][1]:
                 fringe[nextState] = (explored[0] + cost, heuristic(nextState, problem),  explored[2]+ [action])
                 queue.update(nextState, fcost)
-    
     util.raiseNotDefined()
 
 # Abbreviations
