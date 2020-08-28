@@ -13,6 +13,8 @@
 
 from copy import deepcopy
 
+call_counter = 0
+
 class GameState:
     """
     Attributes
@@ -97,9 +99,24 @@ class GameState:
         player has no remaining liberties (even if the
         player is not active in the current state)
         """
+        global call_counter
+        call_counter += 1
+        
         terminated = (not self._has_liberties(self._player) or  
                       not self._has_liberties(1-self._player))
         return terminated
+
+    def utility(self, player_id):
+        """ return +inf if the game is terminal and the
+        specified player wins, return -inf if the game
+        is terminal and the specified player loses, and
+        return 0 if the game is not terminal
+        """
+        if not self.terminal_test(): return 0
+        player_id_is_active = (player_id == self.player())
+        player_has_liberties = self._has_liberties(self.player())
+        active_player_wins = (player_has_liberties == player_id_is_active)
+        return float("inf") if active_player_wins else float("-inf")
 
     def liberties(self, loc):
         """ Return a list of all open cells in the
