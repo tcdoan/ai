@@ -290,3 +290,25 @@ def max_value(gameState, depth):
         v = max(v, min_value(gameState.result(a), depth - 1))
     return v
 ```
+
+### **Iterative deepening**
+
+Iterative deepening is a search technique that allows minimax-style search functions to return an approximate solution when computational resources are bounded. The basic idea is to start with a small depth-limited search, and grow the depth limit until the resource limit (usually search time) expires.
+
+The get_action() function below which should wrap calls to the minimax.minimax_decision function to perform "iterative deepening" depth limited search. 
+- Start with a depth of 1 (the root node itself is a depth of 0), 
+- and call the decision function for each depth value up to (and including) the depth limit.
+
+```python
+
+from minimax import minimax_decision
+def get_action(gameState, depth_limit):
+    # TODO: Implement a function that calls minimax_decision
+    # for each depth from 1...depth_limit (inclusive of both endpoints)
+    best_move = None
+    for depth in range(1, depth_limit+1):
+        best_move = minimax_decision(gameState, depth)
+    return best_move
+    
+```
+
