@@ -49,9 +49,7 @@ class Status(Enum):
     INVALID_MOVE = 3
     GAME_OVER = 4
 
-
 class StopSearch(Exception): pass  # Exception class used to halt search
-
 
 class TimedQueue:
     """Modified queue class to block .put() after a time limit expires,

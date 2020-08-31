@@ -146,8 +146,8 @@ class Isolation(NamedTuple('Isolation', [('board', int), ('ply_count', int), ('l
         """
         if not self.terminal_test(): return 0
         player_id_is_active = (player_id == self.player())
-        active_has_liberties = self._has_liberties(self.player())
-        active_player_wins = (active_has_liberties == player_id_is_active)
+        player_has_liberties = self._has_liberties(self.player())
+        active_player_wins = (player_has_liberties == player_id_is_active)
         return float("inf") if active_player_wins else float("-inf")
 
     def liberties(self, loc):
@@ -185,7 +185,7 @@ class DebugState(Isolation):
     Examples
     --------
     >>> board = Isolation()
-    >>> debug_board = DebugBoard.from_state(board)
+    >>> debug_board = DebugState.from_state(board)
     >>> print(debug_board.bitboard_string)
     11111111111001111111111100111111111110011111111111001111111111100111111111110011111111111
     >>> print(debug_board)
