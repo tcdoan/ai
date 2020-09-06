@@ -33,7 +33,7 @@ $ cd "artificial-intelligence/Projects/3_Game Playing"
 
 ### **Instructions** ###
 
-Implement an agent in the `CustomPlayer` class defined in the `game_agent.py` file.
+Implement an agent in the `CustomPlayer` class defined in the `my_custom_player.py` file.
 
 The interface definition for game agents only requires `.get_action()` implementation.
 - Add any other methods to the class that you deem necessary.
