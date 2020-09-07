@@ -46,7 +46,6 @@ class CustomPlayer(DataPlayer):
             depth=5
             while True:
               action = self.alphabeta(state, depth)
-              # print("Depth: {0}, action = {1}".format(depth, action))
               self.queue.put(action)
               depth += 1
 
@@ -88,7 +87,7 @@ class CustomPlayer(DataPlayer):
           if v > bestScore:
             bestScore = v
             bestAction = a
-            
+
         import random
         if bestAction is None: bestAction = random.choice(state.actions())
         return bestAction
