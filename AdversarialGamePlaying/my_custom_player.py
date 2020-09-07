@@ -35,19 +35,19 @@ class CustomPlayer(DataPlayer):
           Refer to (and use!) the Isolation.play() function to run games.
         **********************************************************************
         """
-        # TODO: Replace the example implementation below with your own search
-        #       method by combining techniques from lecture
-        #
-        # EXAMPLE: choose a random move without any search--this function MUST
-        #          call self.queue.put(ACTION) at least once before time expires
-        #          (the timer is automatically managed for you)
+        # TODO: Implement a search method that works better than Naive minimax algorithm.
+        #       Bad implementation: choose a random move without any search.
+        #       This function MUST call self.queue.put(ACTION) at least once before time 
+        #       expires (the timer is automatically managed for you)
         import random
         if state.ply_count < 2:
             self.queue.put(random.choice(state.actions()))
         else:
             depth=5
             while True:
-              self.queue.put(self.alphabeta(state, depth))
+              action = self.alphabeta(state, depth)
+              # print("Depth: {0}, action = {1}".format(depth, action))
+              self.queue.put(action)
               depth += 1
 
     def alphabeta(self, state, depth):
@@ -70,7 +70,7 @@ class CustomPlayer(DataPlayer):
           if depth <= 0: return self.score(state)
           v = float("-inf")
           for a in state.actions():
-            v = max(v, min_value(state.result(a), alpha, beta))
+            v = max(v, min_value(state.result(a), depth-1, alpha, beta))
             alpha = max(alpha, v)
             if v > beta: return beta
           return v
@@ -88,6 +88,9 @@ class CustomPlayer(DataPlayer):
           if v > bestScore:
             bestScore = v
             bestAction = a
+            
+        import random
+        if bestAction is None: bestAction = random.choice(state.actions())
         return bestAction
 
     def score(self, state):
