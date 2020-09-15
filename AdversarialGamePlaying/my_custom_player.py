@@ -3,7 +3,12 @@ import random
 import math
 
 class CustomPlayer(DataPlayer):
+    """ Implementation of Monte Carlo tree search agent to play knight's Isolation
+    """    
     def get_action(self, state):
+        """ Employ MCTS adversarial search technique to choose an action 
+        (a move) available in the current state.
+        """        
         v0 = MctNode(state, None)
         while True:
             _, v1 = self.treePolicy(v0)
@@ -15,16 +20,15 @@ class CustomPlayer(DataPlayer):
     def treePolicy(self, v):
         a = None
         while v.nonTerminal():
-          if not v.fullyExpanded():
-            return v.expand()
-          else:
-            a, v = v.bestChild(1.4)
+          if not v.fullyExpanded(): 
+              return v.expand()
+          else: 
+              a, v = v.bestChild(1.4)
         return a, v
 
     def backupNegaMax(self, v, delta):
         while v is not None:
-            v.N = v.N + 1
-            v.Q = v.Q + delta
+            v.N, v.Q = v.N + 1, v.Q + delta
             delta = -delta
             v = v.parent
 
@@ -60,13 +64,11 @@ class MctNode:
         return len(self.untriedActions) == 0
 
     def bestChild(self, c = 1.4):
-        bestAction = None
-        bestChild = None      
-        bestReward = float("-inf")
+        bestAction, bestChild, bestReward = None, None, float("-inf")
         for a, v2 in zip(self.actions, self.children):
             v2Reward = v2.Q/v2.N + c * math.sqrt(2 * math.log(self.N) / v2.N)
             if v2Reward > bestReward:
-                bestAction = a
+                bestReward, bestAction = v2Reward, a
                 bestChild = v2
         return bestAction, bestChild
 

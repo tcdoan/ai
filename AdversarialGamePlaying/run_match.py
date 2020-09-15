@@ -18,7 +18,7 @@ from my_custom_player import CustomPlayer
 logger = logging.getLogger(__name__)
 
 NUM_PROCS = 1
-NUM_ROUNDS = 2  # number times to replicate the match; increase for higher confidence estimate
+NUM_ROUNDS = 5    # number times to replicate the match; increase for higher confidence estimate
 TIME_LIMIT = 150  # number of milliseconds before timeout
 
 TEST_AGENTS = {
@@ -29,7 +29,6 @@ TEST_AGENTS = {
 }
 
 Match = namedtuple("Match", "players initial_state time_limit match_id debug_flag")
-
 
 def _run_matches(matches, name, num_processes=NUM_PROCS, debug=True):
     results = []

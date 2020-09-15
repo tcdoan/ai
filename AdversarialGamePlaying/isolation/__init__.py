@@ -38,6 +38,7 @@ RESULT_INFO = """\
 Status: {}
 Final State: {}
 History: {}
+States: {}
 Winner: {}
 Loser: {}
 """
@@ -116,6 +117,7 @@ def _play(agents, game_state, time_limit, match_id, debug=False):
     """
     initial_state = game_state
     game_history = []
+    state_history = []
     winner = None
     status = Status.NORMAL
     players = [a.agent_class(player_id=i) for i, a in enumerate(agents)]
@@ -148,14 +150,16 @@ def _play(agents, game_state, time_limit, match_id, debug=False):
             status = Status.INVALID_MOVE
             break
 
-        game_state = game_state.result(action)
+        game_state = game_state.result(action)        
         game_history.append(action)
+        # debug_board = DebugState.from_state(game_state)
+        # state_history.append(debug_board.__str__())
     else:
         status = Status.GAME_OVER
         if game_state.utility(active_idx) > 0:
             winner, loser = loser, winner  # swap winner/loser if active player won
 
-    logger.info(RESULT_INFO.format(status, game_state, game_history, winner, loser))
+    logger.info(RESULT_INFO.format(status, game_state, game_history, state_history, winner, loser))
     return winner, game_history, match_id
 
 
