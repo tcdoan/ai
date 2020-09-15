@@ -14,11 +14,12 @@ from multiprocessing.pool import ThreadPool as Pool
 from isolation import Isolation, Agent, play
 from sample_players import RandomPlayer, GreedyPlayer, MinimaxPlayer
 from my_custom_player import CustomPlayer
+from alpha_beta_player import AlphabetaPlayer
 
 logger = logging.getLogger(__name__)
 
 NUM_PROCS = 1
-NUM_ROUNDS = 5    # number times to replicate the match; increase for higher confidence estimate
+NUM_ROUNDS = 1    # number times to replicate the match; increase for higher confidence estimate
 TIME_LIMIT = 150  # number of milliseconds before timeout
 
 TEST_AGENTS = {
@@ -104,7 +105,8 @@ def play_matches(custom_agent, test_agent, cli_args):
 
 def main(args):
     test_agent = TEST_AGENTS[args.opponent.upper()]
-    custom_agent = Agent(CustomPlayer, "Custom Agent")
+    # custom_agent = Agent(CustomPlayer, "Custom Agent")
+    custom_agent = Agent(AlphabetaPlayer, "Alphabeta Agent")
     wins, num_games = play_matches(custom_agent, test_agent, args)
 
     logger.info("Your agent won {:.1f}% of matches against {}".format(
